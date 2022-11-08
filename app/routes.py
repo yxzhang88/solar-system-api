@@ -76,3 +76,13 @@ def create_planet():
     db.session.add(new_planet)
     db.session.commit()
     return {"id": new_planet.id, "name":new_planet.name, "description": new_planet.description, "temp":new_planet.temp},201
+
+@ planet_bp.route("/<planet_id>", methods= ["DELETE"])
+def delete_one_planet(planet_id):
+    planet = validate_planets(planet_id)
+
+    db.session.delete(planet)
+    db.session.commit()
+    return f"planet #{planet_id} successfully deleted"
+
+
